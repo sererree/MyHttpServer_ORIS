@@ -1,0 +1,14 @@
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\bin\Debug\net10.0\MyHttpServer_ORIS.exe
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\bin\Debug\net10.0\MyHttpServer_ORIS.deps.json
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\bin\Debug\net10.0\MyHttpServer_ORIS.runtimeconfig.json
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\bin\Debug\net10.0\MyHttpServer_ORIS.dll
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\bin\Debug\net10.0\MyHttpServer_ORIS.pdb
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\obj\Debug\net10.0\MyHttpServer_ORIS.GeneratedMSBuildEditorConfig.editorconfig
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\obj\Debug\net10.0\MyHttpServer_ORIS.AssemblyInfoInputs.cache
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\obj\Debug\net10.0\MyHttpServer_ORIS.AssemblyInfo.cs
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\obj\Debug\net10.0\MyHttpServer_ORIS.csproj.CoreCompileInputs.cache
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\obj\Debug\net10.0\MyHttpServer_ORIS.dll
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\obj\Debug\net10.0\refint\MyHttpServer_ORIS.dll
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\obj\Debug\net10.0\MyHttpServer_ORIS.pdb
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\obj\Debug\net10.0\MyHttpServer_ORIS.genruntimeconfig.cache
+D:\VisualStudioProjects\HttpServerOris\MyHttpServer_ORIS\obj\Debug\net10.0\ref\MyHttpServer_ORIS.dll
