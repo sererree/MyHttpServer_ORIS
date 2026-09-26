@@ -17,7 +17,7 @@ namespace MyHttpServer
         {
             _listener = new HttpListener();
 
-            // Проверка на существование файла settings.json
+            
             if (!File.Exists("settings.json"))
             {
                 Console.WriteLine("Ошибка: файл settings.json не найден!");
@@ -39,21 +39,21 @@ namespace MyHttpServer
                 _isRunning = true;
                 Console.WriteLine("Сервер запущен и слушает: " + _urlPrefix);
 
-                // Бесконечный цикл постоянного прослушивания запросов
+                
                 while (_isRunning)
                 {
                     try
                     {
-                        // Получаем контекст асинхронно
+                        
                         var context = await _listener.GetContextAsync();
 
-                        // Обрабатываем запрос в фоновом режиме, чтобы не блокировать цикл
+                        
                         _ = ProcessRequestAsync(context);
                     }
                     catch (HttpListenerException)
                       when (!_isRunning)
                     {
-                        // Исключение при штатной остановке лисенера — это нормально
+                        
                         break;
                     }
                 }
@@ -65,34 +65,50 @@ namespace MyHttpServer
         }
 
         private async Task ProcessRequestAsync(HttpListenerContext context)
-        {
-            var response = context.Response;
+{
+    var response = context.Response;
+    string requestPath = context.Request.Url.AbsolutePath.TrimStart('/');
 
-            // Проверка на существование файла search-engine.html (согласно заданию)
-            string htmlFileName = "search-engine.html";
-            if (!File.Exists(htmlFileName))
-            {
-                Console.WriteLine($"Ошибка: файл {htmlFileName} не найден!");
-                response.StatusCode = (int)HttpStatusCode.NotFound;
-                byte[] notFoundBuffer = Encoding.UTF8.GetBytes("<h1>404 Not Found</h1>");
-                response.ContentLength64 = notFoundBuffer.Length;
-                await response.OutputStream.WriteAsync(notFoundBuffer);
-                await response.OutputStream.FlushAsync();
-                return;
-            }
+    // Если запрашивают корень, отдаем search.html
+    if (string.IsNullOrEmpty(requestPath) || requestPath == "connection")
+    {
+        requestPath = "search.html";
+    }
 
-            // Читаем текст HTML-страницы поиска
-            string htmlFileText = File.ReadAllText(htmlFileName);
-            byte[] buffer = Encoding.UTF8.GetBytes(htmlFileText);
+    // Проверяем существование файла
+    if (!File.Exists(requestPath))
+    {
+        response.StatusCode = (int)HttpStatusCode.NotFound;
+        byte[] notFoundBuffer = Encoding.UTF8.GetBytes("<h1>404 Not Found</h1>");
+        response.ContentLength64 = notFoundBuffer.Length;
+        await response.OutputStream.WriteAsync(notFoundBuffer);
+        await response.OutputStream.FlushAsync();
+        return;
+    }
 
-            // Отправляем данные клиенту
-            response.ContentLength64 = buffer.Length;
-            using Stream output = response.OutputStream;
-            await output.WriteAsync(buffer);
-            await output.FlushAsync();
+    // Устанавливаем правильный Content-Type в зависимости от расширения
+    if (requestPath.EndsWith(".css"))
+    {
+        response.ContentType = "text/css; charset=utf-8";
+    }
+    else if (requestPath.EndsWith(".html"))
+    {
+        response.ContentType = "text/html; charset=utf-8";
+    }
+    else if (requestPath.EndsWith(".png") || requestPath.EndsWith(".svg"))
+    {
+        response.ContentType = requestPath.EndsWith(".svg") ? "image/svg+xml" : "image/png";
+    }
 
-            Console.WriteLine("Запрос обработан");
-        }
+    byte[] buffer = await File.ReadAllBytesAsync(requestPath);
+    response.ContentLength64 = buffer.Length;
+    
+    using Stream output = response.OutputStream;
+    await output.WriteAsync(buffer);
+    await output.FlushAsync();
+
+    Console.WriteLine($"Запрос обработан: {requestPath}");
+}
 
         public void Stop()
         {

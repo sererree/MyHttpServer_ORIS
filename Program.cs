@@ -8,10 +8,10 @@ class Program
     {
         HttpServer server = new HttpServer();
 
-        // Запускаем сервер в фоновой задаче, чтобы не блокировать главный поток консоли
+        
         Task serverTask = server.StartAsync();
 
-        // Ожидаем команду остановки из консоли (например, "stop" или "exit")
+        
         string command;
         while (true)
         {
